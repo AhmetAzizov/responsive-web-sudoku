@@ -45,6 +45,8 @@ function createStartPage(){
   optionFormatDefault.value = "0";
   optionFormatDefault.selected = true;
   optionFormatDefault.innerText = "Format";
+  optionFormatDefault.disabled = true;
+  optionFormatDefault.hidden = true;
 
   const option6x6 = document.createElement("option");
   option6x6.value = "2,3";
@@ -80,7 +82,7 @@ function createMainPage(format){
 	for (var a = 1; a < format + 1; a++) {
       var button1 = document.createElement("div");
 			button1.id = `button${a}`;
-			button1.classList.add("button");
+			button1.classList.add("numberButtons");
 			button1.innerHTML = `${a}`;
 			
 			buttonContainer.append(button1);
@@ -204,17 +206,19 @@ function startButton(){
           }
         }
 
-        var inputs = document.getElementsByClassName("input");
-        for (let index = 0; index < inputs.length; index++) {
-          const element = inputs[index];
-          element.classList.remove("cellHover");
-          element.classList.remove("cellActive");
-        }
+        // var inputs = document.getElementsByClassName("input");
+        // for (let index = 0; index < inputs.length; index++) {
+        //   const element = inputs[index];
+        //   element.classList.remove("cellHover");
+        //   element.classList.remove("cellActive");
+        // }
 
 
         if (Object.keys(sudokuMatrix).length == format ** 2 && error == 0) {
-          document.getElementById("endScreen").style.visibility = "visible";
-          document.getElementById("endScreenFinishTime").innerHTML = minutesDisplay + ":" + secondsDisplay;
+          // document.getElementById("endScreen").style.visibility = "visible";
+          // document.getElementById("endScreenFinishTime").innerHTML = minutesDisplay + ":" + secondsDisplay;
+
+          alert(`Congratulations!\nYou have finished the game in\n ${minutesDisplay}:${secondsDisplay}`);
           clearInterval(timer);
         }
       }
@@ -251,6 +255,7 @@ function startButton(){
       document.getElementById("pauseScreen").style.visibility = "visible";
 
       document.getElementById("sudokuContainer").style.pointerEvents = "none";
+      document.getElementsByClassName("menuContainer")[0].style.pointerEvents = "none";
 
       document.getElementById("pauseScreenTimeLeft").innerHTML = minutesDisplay + ":" + secondsDisplay;
 
@@ -262,6 +267,7 @@ function startButton(){
       document.getElementById("pauseScreen").style.visibility = "hidden";
 
       document.getElementById("sudokuContainer").style.pointerEvents = "all";
+      document.getElementsByClassName("menuContainer")[0].style.pointerEvents = "all";
 
       isPaused = false;
     }
@@ -309,6 +315,8 @@ function startButton(){
     function onchangeHandler(i, j) {
       $(`a${getIndex(i, j)}`).addEventListener("click", (e) => {
         lightRowsAndColumns(i, j, e.target);
+
+        checkSameBox(i, j);
 
         num1 = i;
         num2 = j;
@@ -366,7 +374,7 @@ function startButton(){
   
 
     document.addEventListener("click", function (e) {
-      if (!document.getElementById("sudokuContainer").contains(e.target) || document.getElementsByClassName("menuContainer")[0].contains(e.target)){
+      if (!document.getElementById("sudokuContainer").contains(e.target) && !document.getElementsByClassName("menuContainer")[0].contains(e.target)){
         var inputs = document.getElementsByClassName("input");
         for (let index = 0; index < inputs.length; index++) {
           const element = inputs[index];
@@ -457,6 +465,30 @@ function startButton(){
       }
       return true;
     }
+
+
+    function checkSameBox(row, col){
+      var startX = Math.ceil(col / boxCol) - 1;
+      var startY = Math.ceil(row / boxRow) - 1;
+
+      for (var x = 1; x < boxCol + 1; x++) {
+        var currentX = startX * boxCol + x;
+        for (var y = 1; y < boxRow + 1; y++) {
+          var currentY = startY * boxRow + y;
+
+          document.getElementById("a" + currentY + ";" + currentX).classList.add("cellHover");
+
+          // if (currentX == col && currentY == row) {
+          //   continue;
+          // }
+          // if (sudokuMatrix[getIndex(currentY, currentX)] == value) {
+          //   //document.getElementById(currentX + ";" + currentY).style.backgroundColor = "red";
+          // }
+        }
+      }
+    }
+
+
 
     function createDifficulty() {
 

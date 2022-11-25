@@ -1,4 +1,4 @@
-body {
+html {
   font-size: 1px;
   background-color: antiquewhite;
   width: 100%;
@@ -25,34 +25,42 @@ align-items: center; */
   border-radius: 50px;
   visibility: hidden;
   z-index: 1;
+  font-weight: bolder;
 }
 
-
-#pauseScreenText{
+#pauseScreen #pauseScreenText{
+  position: absolute;
+  top: 0%;
+  color: green;
+  width: 100%;
   font-size: 30px;
-  font-weight: bold;
-  font-family: cursive;
-  position: absolute;
-  top: -5%;
-  width: 100%;
 }
 
-#pauseScreenTimeLeft{
-  font-size: 80px;
-  color: white;
+#pauseScreen #pauseScreenTimeLeft{
+  position: absolute;
+  width: 100%;
+  top: 10%;
+  font-size: 60px;
+}
+
+#pauseScreen #pauseScreenResumeButton{
+  position: absolute;
+  width: 50%;
+  height: 25%;
+  background: blue;
+  left: 25%;
+  bottom: 5%;
   border-radius: 50px;
-  position: absolute;
-  left: 42%;
-  width: 100%;
-  top: 20%;
+  font-size: 50px;
 }
 
-#pauseScreenResumeButton:hover{
-  background-color: rgb(0, 72, 255);
+#pauseScreen #pauseScreenResumeButton:hover{
+  background-color: rgb(100, 138, 235);
 }
 
 #endScreen{
-  position: absolute;
+  visibility: hidden;
+  /* position: absolute;
   background-color: brown;
   text-align: center;
   width: 800px;
@@ -61,43 +69,43 @@ align-items: center; */
   top: calc(50% - 300px);
   border-radius: 50px;
   visibility: hidden;
-  z-index: 1.5;
+  z-index: 1.5; */
 }
 
 #endScreen #endScreenText{
-  FONT-WEIGHT: bold;
-  FONT-SIZE: 35px;
+  /* FONT-WEIGHT: bold;
+  FONT-SIZE: 35px; */
 }
 
 #endScreen .endScreenButton{
-  position: absolute;
+  /* position: absolute;
   background-color: rgb(228 255 0);
   width: 200px;
   height: 60px;
-  border-radius: 50px;
+  border-radius: 50px; */
 }
 
 #endScreen #endScreenHomeButton{
-  left: 100px;
+  /* left: 100px;
   bottom: 60px;
-  font-size: 40px;
+  font-size: 40px; */
 }
 
 #endScreen #endScreenReturnButton{
-  right: 100px;
+  /* right: 100px;
   bottom: 60px;
   font-size: 50px;
-  color: blue;
+  color: blue; */
 }
 
 #endScreen #endScreenFinishTime{
-  font-size: 60px;
+  /* font-size: 60px;
   border: 4px dashed blue;
   margin-left: 270px;
   margin-right: 270px;
   border-radius: 60px;
   font-weight: bold;
-  color: gold;
+  color: gold; */
 }
 
 #sudokuContainer {
@@ -110,11 +118,21 @@ align-items: center; */
   left: 2%;
 }
 
+#startButton {
+  position: relative;
+  width: 40%;
+  height: 50px;
+  font-size: 35px;
+  margin: auto;
+  display: block;
+  overflow: hidden;
+}
+
 #selectDifficulty {
   position: relative;
   font-size: 30px;
   color: red;
-  width: 60%;
+  width: 40%;
   margin: auto;
   display: block;
   margin-top: 50px;
@@ -127,7 +145,7 @@ align-items: center; */
   position: relative;
   font-size: 30px;
   color: red;
-  width: 60%;
+  width: 40%;
   margin: auto;
   display: block;
   margin-top: 50px;
@@ -148,7 +166,7 @@ align-items: center; */
   margin: 0;
   float: left; */
 
-  border: 2px solid gray;
+  border: 1px solid gray;
   background-color: white;
   aspect-ratio: 1 / 1;
   text-align: center;
@@ -166,27 +184,22 @@ align-items: center; */
   grid-template-rows: 1fr 1fr 1fr 3fr;
   grid-gap: 2%;
   right: 1%;
-  background-color: cadetblue;
+  background-color: rgb(172, 171, 171);
   border-radius: 5vw;
   padding: 2vw;
   bottom: 2%;
   top: 2%;
 }
 
-#startButton {
-  position: relative;
-  width: 50%;
-  height: 50px;
-  font-size: 35px;
-  margin: auto;
-  display: block;
-  overflow: hidden;
+.buttonContainer{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row: 4 / 6;
+  grid-column: 1 / 3;
 }
 
-
-
 .button {
-  background-color: gray;
+  background-color: rgb(203, 202, 202);
   text-align: center;
   font-size: 9vh;
   border-radius: 3vw;
@@ -194,12 +207,13 @@ align-items: center; */
   overflow: hidden;
 }
 
-.button:hover{
-  background-color: aqua;
-}
-
-.menuContainer .tipButton:hover{
-  background-color: yellow;
+.numberButtons{
+  background-color: rgb(203, 202, 202);
+  text-align: center;
+  font-size: 9vh;
+  font-weight: bold;
+  overflow: hidden;
+  border: 1px solid rgb(172, 171, 171);
 }
 
 .clearButton{
@@ -210,47 +224,60 @@ align-items: center; */
 .tipButton{
   grid-row: 3 / 4;
   grid-column: 1 / 2;
-  background-color: gray;
-  border-radius: 3vw;
 }
 
 .timeLeft{
   grid-row: 2 / 3;
   grid-column: 2 / 3;
-  background-color: gray;
-  border-radius: 3vw;
+
 }
 
 .pauseButton{
   grid-row: 2 / 3;
   grid-column: 1 / 2;
-  background-color: gray;
-  border-radius: 3vw;
 }
 
 .solveButton{
   grid-column: 2 / 3;
-  background-color: gray;
-  border-radius: 3vw;
+
 }
 
 .homeButton{
   grid-column: 1 / 2;
-  background-color: gray;
-  border-radius: 3vw;
+
 }
 
-.buttonContainer{
-  display: grid;
-  grid-template-columns: repeat(3, 32%);
-  grid-gap: 2%;
-  grid-row: 4 / 6;
-  grid-column: 1 / 3;
+.button:hover{
+  background-color: aqua;
+}
+
+.menuContainer .timer:hover{
+  background-color: gray;
+}
+
+.menuContainer .tipButton:hover{
+  color: yellow;
 }
 
 
 
 @media (max-width: 1199px){
+  .button:hover{
+    background-color: rgb(203, 202, 202);
+  }
+
+  #startButton{
+    width: 60%;
+  }
+
+  #selectDifficulty{
+    width: 60%;
+  }
+
+  #selectFormat{
+    width: 60%;
+  }
+
   @media (1/1 > aspect-ratio >= 10/15){
       .menuContainer{
           position: absolute;
@@ -271,6 +298,10 @@ align-items: center; */
 
       .button{
           font-size: 2.5vh;
+      }
+
+      .numberButtons{
+        font-size: 2.5vh;
       }
 
       .input{
@@ -299,6 +330,11 @@ align-items: center; */
       .button{
           font-size: 3vh;
           padding: 1%;
+      }
+
+      .numberButtons{
+        font-size: 3vh;
+        padding: 1%;
       }
 
       .input{
@@ -332,6 +368,10 @@ align-items: center; */
       .input{
         font-size: 4vh;
       }
+
+      .numberButtons{
+        font-size: 4vh;
+      }
   }
 }
 
@@ -355,28 +395,28 @@ align-items: center; */
 }
 
 .input1 {
-  background-color: rgb(168, 165, 165);
+  background-color: rgb(228, 228, 228);
 }
 
 #sudokuContainer .cellHover {
-  border-width: 3px;
+  /* border-width: 3px;
   border-style: dashed;
-  border-color: rgb(7, 62, 243) 
-  /* background-color: rgb(197, 196, 196); */
+  border-color: rgb(7, 62, 243)  */
+  background-color: #c3c3c3;
 }
 
-.cellActive {
-  background-color: rgb(95, 160, 160);
+#sudokuContainer .cellActive {
+  background-color: #ededed;
 }
 
-.cellError {
-  color: red !important;
+#sudokuContainer .cellError {
+  color: red;
   font-weight: bold;
 }
 
 .cellInitial {
-  border-width: 3px;
-  border-color: black;
+  /* border-width: 1px; */
+  /* border-color: black; */
   color: darkblue;
 }
 
