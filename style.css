@@ -379,9 +379,8 @@ align-items: center; */
 }
 
 .cellInitial {
-  /* border-width: 1px; */
-  /* border-color: black; */
-  color: darkblue;
+  color: cornflowerblue;
+  font-family: cursive;
 }
 
 .cellTips {
@@ -389,4 +388,9 @@ align-items: center; */
   pointer-events: none;
   border-width: 3px;
   border-color: black;
+}
+
+.sameInput{
+  color: gray;
+  font-family: fantasy;
 }

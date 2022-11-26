@@ -197,6 +197,13 @@ function startButton(){
         for (var a = 1; a < format + 1; a++) {
           for (var b = 1; b < format + 1; b++) {
             currentValue = document.getElementById(`a${getIndex(a, b)}`).innerHTML;
+
+            if(currentValue == buttonIndex){
+              document.getElementById(`a${getIndex(a, b)}`).classList.add("sameInput");
+            }else{
+              document.getElementById(`a${getIndex(a, b)}`).classList.remove("sameInput");
+            }
+
             if (!checkMatrix(a, b, currentValue)) {
               error = 1;
               document.getElementById(`a${getIndex(a, b)}`).classList.add("cellError");
@@ -250,7 +257,7 @@ function startButton(){
     }
 
     document.getElementsByClassName("sideTipButton")[0].onclick = () => {
-      if(document.getElementById(`a${num1};${num2}`).innerHTML == "" && gameDifficulty > 0){
+      if((document.getElementById(`a${num1};${num2}`).classList.contains("cellError") || document.getElementById(`a${num1};${num2}`).innerHTML == "") && gameDifficulty > 0){
         gameDifficulty--;
         document.getElementById(`a${num1};${num2}`).innerHTML = matrixClone[getIndex(num1, num2)];
         document.getElementsByClassName("sideTipButton")[0].innerHTML = `&#128161; ${gameDifficulty}`;
@@ -272,6 +279,12 @@ function startButton(){
         if (Object.keys(sudokuMatrix).length == format ** 2 && error == 0) {
           alert(`Congratulations!\nYou have finished the game in\n ${minutesDisplay}:${secondsDisplay}`);
           clearInterval(timer);
+        }
+
+        var inputs = document.getElementsByClassName("input");
+        for (let index = 0; index < inputs.length; index++) {
+          const element = inputs[index];
+          element.classList.remove("cellHover", "cellActive", "cellError", "sameInput");
         }
 
         num1 = undefined;
@@ -322,9 +335,11 @@ function startButton(){
       var inputs = document.getElementsByClassName("input");
         for (let index = 0; index < inputs.length; index++) {
           const element = inputs[index];
-          element.classList.remove("cellHover");
-          element.classList.remove("cellActive");
+          element.classList.remove("cellHover", "cellActive", "sameInput");
         }
+
+      num1 = undefined;
+      num2 = undefined;
     }
     
 
@@ -340,6 +355,19 @@ function startButton(){
 
         num1 = i;
         num2 = j;
+
+        for (var a = 1; a < format + 1; a++) {
+          for (var b = 1; b < format + 1; b++) {
+            currentValue = document.getElementById(`a${getIndex(a, b)}`).innerHTML;
+
+            if(currentValue == document.getElementById(`a${getIndex(num1, num2)}`).innerHTML){
+              document.getElementById(`a${getIndex(a, b)}`).classList.add("sameInput");
+            }else{
+              document.getElementById(`a${getIndex(a, b)}`).classList.remove("sameInput");
+            }
+          }
+        }
+
       });
     }
 -
@@ -400,8 +428,7 @@ function startButton(){
         var inputs = document.getElementsByClassName("input");
         for (let index = 0; index < inputs.length; index++) {
           const element = inputs[index];
-          element.classList.remove("cellHover");
-          element.classList.remove("cellActive");
+          element.classList.remove("cellHover", "cellActive", "sameInput");
         }
       }
     });
