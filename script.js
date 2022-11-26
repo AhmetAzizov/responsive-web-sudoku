@@ -94,8 +94,8 @@ function createMainPage(format){
 	clearButton.innerHTML = "clear";
 	
 	var menuButton = document.createElement("div");
-	menuButton.classList.add("button", "menuButton", "fa", "fa-home");
-	// menuButton.innerHTML = "&#127968;";
+	menuButton.classList.add("button", "menuButton");
+	menuButton.innerHTML = "&#127968;";
 
   var sideTipButton = document.createElement("div");
   sideTipButton.classList.add("button", "sideTipButton");
@@ -106,8 +106,8 @@ function createMainPage(format){
 	solveButton.innerHTML = "Solve";
 	
 	var pauseButton = document.createElement("div");
-	pauseButton.classList.add("button", "pauseButton", "fa", "fa-pause");
-	// pauseButton.innerHTML = "&#9208;";
+	pauseButton.classList.add("button", "pauseButton");
+	pauseButton.innerHTML = "&#9208;";
 	
 	var timer = document.createElement("div");
 	timer.classList.add("button", "timer");
@@ -256,6 +256,26 @@ function startButton(){
         document.getElementsByClassName("sideTipButton")[0].innerHTML = `&#128161; ${gameDifficulty}`;
         document.getElementById(`a${num1};${num2}`).style.pointerEvents = "none";
         document.getElementById(`a${num1};${num2}`).classList.add("tipInput");
+
+        sudokuMatrix[getIndex(num1, num2)] = matrixClone[getIndex(num1, num2)];
+
+        var error = 0;
+        for (var a = 1; a < format + 1; a++) {
+          for (var b = 1; b < format + 1; b++) {
+            currentValue = document.getElementById(`a${getIndex(a, b)}`).innerHTML;
+            if (!checkMatrix(a, b, currentValue)) {
+              error = 1;
+            } else{ }
+          }
+        }
+
+        if (Object.keys(sudokuMatrix).length == format ** 2 && error == 0) {
+          alert(`Congratulations!\nYou have finished the game in\n ${minutesDisplay}:${secondsDisplay}`);
+          clearInterval(timer);
+        }
+
+        num1 = undefined;
+        num2 = undefined;
       }
     }
 
