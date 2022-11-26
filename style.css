@@ -217,7 +217,7 @@ align-items: center; */
 
 
 
-@media (max-width: 1199px){
+@media (orientation: portrait){
   .button:hover{
     background-color: rgb(203, 202, 202);
   }
