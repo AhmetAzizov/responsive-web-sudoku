@@ -2,6 +2,7 @@ var boxRow;
 var boxCol;
 var busy = false;
 var test2 = 0;
+var gameDifficulty;
 
 
 function createStartPage(){
@@ -32,7 +33,7 @@ function createStartPage(){
   optionMedium.innerText = "Medium";
 
   const optionHard = document.createElement("option");
-  optionHard.value = "3";
+  optionHard.value = "5";
   optionHard.innerText = "Hard";
 
   selectDifficulty.append(optionDefault, optionEasy, optionMedium, optionHard);
@@ -92,13 +93,9 @@ function createMainPage(format){
 	clearButton.classList.add("button", "clearButton");
 	clearButton.innerHTML = "clear";
 	
-	var tipButton = document.createElement("div");
-	tipButton.classList.add("button", "tipButton");
-	tipButton.innerHTML = "&#128161;";
-	
 	var menuButton = document.createElement("div");
-	menuButton.classList.add("button", "menuButton");
-	menuButton.innerHTML = "&#127968;";
+	menuButton.classList.add("button", "menuButton", "fa", "fa-home");
+	// menuButton.innerHTML = "&#127968;";
 
   var sideTipButton = document.createElement("div");
   sideTipButton.classList.add("button", "sideTipButton");
@@ -109,8 +106,8 @@ function createMainPage(format){
 	solveButton.innerHTML = "Solve";
 	
 	var pauseButton = document.createElement("div");
-	pauseButton.classList.add("button", "pauseButton");
-	pauseButton.innerHTML = "&#9208;";
+	pauseButton.classList.add("button", "pauseButton", "fa", "fa-pause");
+	// pauseButton.innerHTML = "&#9208;";
 	
 	var timer = document.createElement("div");
 	timer.classList.add("button", "timer");
@@ -171,6 +168,7 @@ function startButton(){
     }
 
     var format = boxRow * boxCol; // this variable stores the information whether the game will be 6x6 or 9x9 by simply multiplying the two sides.
+    var gameDifficulty = Math.floor(boxRow * 6 / document.getElementById("selectDifficulty").value);
 
     // this array contains numbers from 1 to 6 or 9 depending on the format user has chosen.
     var __random = [];
@@ -181,6 +179,7 @@ function startButton(){
     createMainPage(format);
 
     document.getElementById("sudokuContainer").style.gridTemplateColumns = `repeat(${format}, 1fr)`;
+    document.getElementsByClassName("sideTipButton")[0].innerHTML = `&#128161; ${gameDifficulty}`;
     
     
     // function popupButtons contains even listeners of buttons inside the popup. We store them in a function in order to be able to loop them and save space.
@@ -250,6 +249,18 @@ function startButton(){
       clearInterval(timer);
     }
 
+    document.getElementsByClassName("sideTipButton")[0].onclick = () => {
+      if(document.getElementById(`a${num1};${num2}`).innerHTML == "" && gameDifficulty > 0){
+        gameDifficulty--;
+        document.getElementById(`a${num1};${num2}`).innerHTML = matrixClone[getIndex(num1, num2)];
+        document.getElementsByClassName("sideTipButton")[0].innerHTML = `&#128161; ${gameDifficulty}`;
+        document.getElementById(`a${num1};${num2}`).style.pointerEvents = "none";
+        document.getElementById(`a${num1};${num2}`).classList.add("tipInput");
+      }
+    }
+
+
+
     document.getElementsByClassName("pauseButton")[0].onclick = () => {
       // document.getElementById("sudokuContainer").style.visibility = "hidden";
       document.getElementById("pauseScreen").style.visibility = "visible";
@@ -272,18 +283,7 @@ function startButton(){
       isPaused = false;
     }
 
-    document.getElementById("endScreenHomeButton").onclick = () => {
-      deleteMainPage();
-      createStartPage();
-
-      document.getElementById("endScreen").style.visibility = "hidden";
-    }
-
-    document.getElementById("endScreenReturnButton").onclick = () => {
-      document.getElementById("endScreen").style.visibility = "hidden";
-      
-      clearInterval(timer);
-    }
+    
 
     document.getElementsByClassName("clearButton")[0].onclick = () => {
       document.getElementById(`a${getIndex(num1, num2)}`).innerHTML = null;
@@ -375,6 +375,8 @@ function startButton(){
 
     document.addEventListener("click", function (e) {
       if (!document.getElementById("sudokuContainer").contains(e.target) && !document.getElementsByClassName("menuContainer")[0].contains(e.target)){
+        num1 = undefined;
+        num2 = undefined;
         var inputs = document.getElementsByClassName("input");
         for (let index = 0; index < inputs.length; index++) {
           const element = inputs[index];

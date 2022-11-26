@@ -58,55 +58,6 @@ align-items: center; */
   background-color: rgb(100, 138, 235);
 }
 
-#endScreen{
-  visibility: hidden;
-  /* position: absolute;
-  background-color: brown;
-  text-align: center;
-  width: 800px;
-  height: 400px;
-  left: calc(50% - 400px);
-  top: calc(50% - 300px);
-  border-radius: 50px;
-  visibility: hidden;
-  z-index: 1.5; */
-}
-
-#endScreen #endScreenText{
-  /* FONT-WEIGHT: bold;
-  FONT-SIZE: 35px; */
-}
-
-#endScreen .endScreenButton{
-  /* position: absolute;
-  background-color: rgb(228 255 0);
-  width: 200px;
-  height: 60px;
-  border-radius: 50px; */
-}
-
-#endScreen #endScreenHomeButton{
-  /* left: 100px;
-  bottom: 60px;
-  font-size: 40px; */
-}
-
-#endScreen #endScreenReturnButton{
-  /* right: 100px;
-  bottom: 60px;
-  font-size: 50px;
-  color: blue; */
-}
-
-#endScreen #endScreenFinishTime{
-  /* font-size: 60px;
-  border: 4px dashed blue;
-  margin-left: 270px;
-  margin-right: 270px;
-  border-radius: 60px;
-  font-weight: bold;
-  color: gold; */
-}
 
 #sudokuContainer {
   position: absolute;
@@ -198,7 +149,7 @@ align-items: center; */
   grid-column: 1 / 3;
 }
 
-.button {
+.menuContainer .button {
   background-color: rgb(203, 202, 202);
   text-align: center;
   font-size: 9vh;
@@ -235,6 +186,7 @@ align-items: center; */
 .pauseButton{
   grid-row: 2 / 3;
   grid-column: 1 / 2;
+  font-weight: lighter !important;
 }
 
 .solveButton{
@@ -248,21 +200,29 @@ align-items: center; */
 }
 
 .button:hover{
-  background-color: aqua;
+  background-color: rgb(163, 163, 163);
+}
+
+.numberButtons:hover{
+  background-color: rgb(163, 163, 163);
 }
 
 .menuContainer .timer:hover{
-  background-color: gray;
+  background-color: rgb(203, 202, 202);
 }
 
 .menuContainer .tipButton:hover{
-  color: yellow;
+  background-color: yellow;
 }
 
 
 
 @media (max-width: 1199px){
   .button:hover{
+    background-color: rgb(203, 202, 202);
+  }
+
+  .numberButtons:hover{
     background-color: rgb(203, 202, 202);
   }
 
@@ -296,11 +256,11 @@ align-items: center; */
           top: 1%;
       }
 
-      .button{
+      .menuContainer .button{
           font-size: 2.5vh;
       }
 
-      .numberButtons{
+      .menuContainer .numberButtons{
         font-size: 2.5vh;
       }
 
@@ -327,12 +287,12 @@ align-items: center; */
           top: 1%;
       }
 
-      .button{
+      .menuContainer .button{
           font-size: 3vh;
           padding: 1%;
       }
 
-      .numberButtons{
+      .menuContainer .numberButtons{
         font-size: 3vh;
         padding: 1%;
       }
@@ -360,7 +320,7 @@ align-items: center; */
           left: 1%;
       }
 
-      .button{
+      .menuContainer .button{
           font-size: 4vh;
           padding: 2%;
       }
@@ -369,7 +329,7 @@ align-items: center; */
         font-size: 4vh;
       }
 
-      .numberButtons{
+      .menuContainer .numberButtons{
         font-size: 4vh;
       }
   }
@@ -395,7 +355,7 @@ align-items: center; */
 }
 
 .input1 {
-  background-color: rgb(228, 228, 228);
+  background-color: rgb(241, 241, 241);
 }
 
 #sudokuContainer .cellHover {
@@ -407,6 +367,10 @@ align-items: center; */
 
 #sudokuContainer .cellActive {
   background-color: #ededed;
+}
+
+.tipInput{
+  color: green;
 }
 
 #sudokuContainer .cellError {
