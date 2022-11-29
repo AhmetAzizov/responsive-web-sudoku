@@ -82,9 +82,13 @@ function createMainPage(format){
 
 	for (var a = 1; a < format + 1; a++) {
       var button1 = document.createElement("div");
+      var buttonWrapper = document.createElement("b");
+      buttonWrapper.classList.add("buttonWrapper");
 			button1.id = `button${a}`;
-			button1.classList.add("numberButtons");
-			button1.innerHTML = `${a}`;
+			button1.classList.add("numberButtons", "button");
+			buttonWrapper.innerHTML = `${a}`;
+
+      button1.append(buttonWrapper);
 			
 			buttonContainer.append(button1);
     	}
@@ -131,7 +135,7 @@ function createMainPage(format){
       }
     }
 	
-	document.body.append(menuContainer, sudokuContainer);
+	document.body.append(sudokuContainer, menuContainer);
 }
 
 createStartPage();
