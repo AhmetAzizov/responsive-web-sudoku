@@ -5,6 +5,7 @@ var test2 = 0;
 var gameDifficulty;
 
 
+
 function createStartPage(){
   const body = document.body;
 
