@@ -15,108 +15,110 @@ body{
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+.mainContainer{
   display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
 }
 
 /* display: flex; 
 justify-content: center; 
 align-items: center; */
 
-#pauseScreen{
-  background-color: red;
-  position: absolute;
-  text-align: center;
-  width: 90%;
-  height: 40%;
-  left: 5%;
+.pauseScreen{
+  background-color: gray;
+  position: fixed;
+  width: 80%;
+  left: 10%;
   top: 20%;
-  border-radius: 50px;
   visibility: hidden;
   z-index: 1;
   font-weight: bolder;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5vh;
 }
 
-#pauseScreen #pauseScreenText{
-  position: absolute;
-  top: 0%;
-  color: green;
+.pauseScreenButtons{
+  font-size: 7vw;
   width: 100%;
-  font-size: 30px;
 }
 
-#pauseScreen #pauseScreenTimeLeft{
-  position: absolute;
-  width: 100%;
-  top: 10%;
-  font-size: 60px;
+.pauseScreen .pauseScreenText{
+  color: lightgray;
+  text-align: center;
+  background-color: darkgrey;
 }
 
-#pauseScreen #pauseScreenResumeButton{
-  position: absolute;
-  width: 50%;
-  height: 25%;
-  background: blue;
-  left: 25%;
-  bottom: 5%;
-  border-radius: 50px;
-  font-size: 50px;
+.pauseScreen .pauseScreenTimeLeft{
+  text-align: center;
+  background-color: lightgray;
 }
 
-#pauseScreen #pauseScreenResumeButton:hover{
-  background-color: rgb(100, 138, 235);
+.pauseScreen .pauseScreenResumeButton{
+  background: rgb(114, 114, 114);
+  /* border-radius: 10vw; */
+  height: minmax(auto, 20%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pauseScreen .pauseScreenResumeButton:hover{
+  background-color: rgb(104, 104, 104);
 }
 
 
 #sudokuContainer {
   display: grid;
-  /* grid-template-columns: repeat(6, auto); */
-  transform: 5ms;
+  margin: 1%;
 }
 
-#startButton {
-  position: relative;
+.startPageWrapper{
+  display: flex;
+  flex-direction: column;
   width: 40%;
-  height: 50px;
-  font-size: 35px;
-  margin: auto;
-  display: block;
-  overflow: hidden;
+  margin-left: 30%;
+  align-items: center;
 }
 
-#selectDifficulty {
-  position: relative;
-  font-size: 30px;
-  color: red;
-  width: 40%;
-  margin: auto;
-  display: block;
-  margin-top: 50px;
+.startPageButtons{
+  width: 100%;
+  font-size: 3vw;
+  font-weight: bold;
+  height: 5vw;
   border-radius: 10px;
-  text-align: center;
   overflow: hidden;
+  text-align: center;
+  margin: 4vh;
 }
 
-#selectFormat {
-  position: relative;
-  font-size: 30px;
+.startButton {
+}
+
+.selectDifficulty {
   color: red;
-  width: 40%;
-  margin: auto;
-  display: block;
-  margin-top: 50px;
-  border-radius: 10px;
-  text-align: center;
-  overflow: hidden;
+}
+
+.selectFormat {
+  color: red;
 }
 
 .input {
   border: 1px solid gray;
   background-color: white;
-  aspect-ratio: 1 / 1;
   text-align: center;
   font-weight: bold;
   overflow: hidden;
-  font-size: 6vh;
+  font-size: 4vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
 }
 
 .menuContainer{
@@ -128,6 +130,7 @@ align-items: center; */
   background-color: rgb(172, 171, 171);
   border-radius: 5vw;
   padding: 2vw;
+  margin: 1%;
 }
 
 .buttonContainer{
@@ -140,7 +143,7 @@ align-items: center; */
 .menuContainer .button {
   background-color: rgb(203, 202, 202);
   text-align: center;
-  font-size: 9vh;
+  font-size: 6vh;
   border-radius: 3vw;
   font-weight: bold;
   overflow: hidden;
@@ -173,7 +176,6 @@ align-items: center; */
 .pauseButton{
   grid-row: 2 / 3;
   grid-column: 1 / 2;
-  font-weight: lighter !important;
 }
 
 .solveButton{
@@ -198,50 +200,62 @@ align-items: center; */
   background-color: rgb(203, 202, 202);
 }
 
-.menuContainer .tipButton:hover{
+.menuContainer .sideTipButton:hover{
   background-color: yellow;
 }
 
 
-
-
 @media(orientation: portrait){
-  body{
+  .menuContainer .sideTipButton:hover{
+    background-color: rgb(203, 202, 202);
+  }
+  
+  .mainContainer{
     flex-direction: column;
+  }
+
+  .button:hover{
+    background-color: rgb(203, 202, 202);
   }
 
   .menuContainer{
     height: 1px;
     flex-grow: 1;
   }
-
-  #sudokuContainer{
-    max-height: 60%;
-  }
-
-  @media (width <= 600px){
-    .menuContainer .button{
-      font-size: 6rem;
+  
+  @media (aspect-ratio > 6/10){
+    #sudokuContainer .input{
+      aspect-ratio: initial;
     }
-  } 
+
+    #sudokuContainer{
+      height: 60%;
+    }
+  }
 }
 
 @media(orientation: landscape){
-  body{
+  .mainContainer{
     flex-direction: row;
   }
 
   .menuContainer{
-    width: 50%;
+    flex-grow: 1;
   }
 
   #sudokuContainer{
-    width: 50%;
-    max-height: 100%;
+    width: 48%;
+    height: max-content;
   }
 
-  .input{
-    aspect-ratio: auto;
+  @media(aspect-ratio > 2/1){
+    #sudokuContainer .input{
+      aspect-ratio: initial;
+    }
+
+    #sudokuContainer{
+      height: auto;
+    }
   }
 }
 
