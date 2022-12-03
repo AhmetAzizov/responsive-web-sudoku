@@ -11,13 +11,14 @@ function createStartPage(){
   var startPageWrapper = document.createElement("div");
   startPageWrapper.classList.add("startPageWrapper");
 
-  var startButtonn = document.createElement("button");
+  var startButtonn = document.createElement("div");
   startButtonn.classList.add("startButton", "startPageButtons");
   startButtonn.onclick = () => {startButton()};
   startButtonn.innerText = "START";
 
   var selectDifficulty = document.createElement("select");
   selectDifficulty.classList.add("selectDifficulty", "startPageButtons");
+  selectDifficulty.id = "selectD";
   
   var optionDefault = document.createElement("option");
   optionDefault.selected = true;
@@ -61,9 +62,25 @@ function createStartPage(){
 
   selectFormat.append(optionFormatDefault, option6x6, option9x9)
   
-  startPageWrapper.append(startButtonn, selectDifficulty, selectFormat);
+  startPageWrapper.append(selectDifficulty, selectFormat, startButtonn);
 
   body.append(startPageWrapper);
+
+  document.getElementsByClassName("selectDifficulty")[0].addEventListener("change", () => {
+    document.getElementsByClassName("selectDifficulty")[0].style.color = "green";
+    
+      if(document.getElementsByClassName("selectFormat")[0].value != "0"){
+      document.getElementsByClassName("startButton")[0].style.height = "5vh";
+      }
+    });
+    
+    document.getElementsByClassName("selectFormat")[0].addEventListener("change", () => {
+      document.getElementsByClassName("selectFormat")[0].style.color = "green";
+    
+      if(document.getElementsByClassName("selectDifficulty")[0].value != "0"){
+      document.getElementsByClassName("startButton")[0].style.height = "5vh";
+      }
+    });
 }
 
 function deleteStartPage(){
@@ -72,6 +89,22 @@ function deleteStartPage(){
 
 function deleteMainPage(){
   document.getElementsByClassName("mainContainer")[0].remove();
+}
+
+function createPauseScreen(){
+  var pauseScreen = document.createElement("div");
+  pauseScreen.classList.add("pauseScreen");
+
+  var pauseScreenText = document.createElement("div");
+  pauseScreenText.classList.add("pauseScreenText", "pauseScreenButtons");
+  pauseScreenText.innerText = "PAUSED";
+
+  var pauseScreenTimeLeft = document.createElement("div");
+  pauseScreenTimeLeft.classList.add("pauseScreenTimeLeft", "pauseScreenButtons");
+  pauseScreenTimeLeft.innerText = "00:00";
+
+  var pauseScreenResumeButton = document.createElement("div");
+  pauseScreenResumeButton.classList.add("pauseScreenResumeButton", "pauseScreenButtons");
 }
 
 function createMainPage(format){
@@ -112,7 +145,7 @@ function createMainPage(format){
 	
 	var pauseButton = document.createElement("div");
 	pauseButton.classList.add("button", "pauseButton");
-	pauseButton.innerHTML = "&#9208;";
+	pauseButton.innerHTML = "l l";
 	
 	var timer = document.createElement("div");
 	timer.classList.add("button", "timer");
@@ -135,12 +168,34 @@ function createMainPage(format){
         sudokuContainer.append(inputs);
       }
     }
+
+
+    var pauseScreen = document.createElement("div");
+    pauseScreen.classList.add("pauseScreen");
+  
+    var pauseScreenText = document.createElement("div");
+    pauseScreenText.classList.add("pauseScreenText", "pauseScreenButtons");
+    pauseScreenText.innerText = "PAUSED";
+  
+    var pauseScreenTimeLeft = document.createElement("div");
+    pauseScreenTimeLeft.classList.add("pauseScreenTimeLeft", "pauseScreenButtons");
+    pauseScreenTimeLeft.innerText = "00:00";
+  
+    var pauseScreenResumeButton = document.createElement("div");
+    pauseScreenResumeButton.classList.add("pauseScreenResumeButton", "pauseScreenButtons");
+    pauseScreenResumeButton.innerHTML = "&#9654;";
+
+    pauseScreen.append(pauseScreenText, pauseScreenTimeLeft, pauseScreenResumeButton);
 	
-	mainContainer.append(sudokuContainer, menuContainer);
-  document.body.append(mainContainer);
+    mainContainer.append(sudokuContainer, menuContainer, pauseScreen);
+    document.body.append(mainContainer);
 }
 
 createStartPage();
+
+
+
+
 
 // this is the function that is invoked when the user presses start button 
 function startButton(){
@@ -186,6 +241,8 @@ function startButton(){
 
     document.getElementById("sudokuContainer").style.gridTemplateColumns = `repeat(${format}, 1fr)`;
     document.getElementsByClassName("sideTipButton")[0].innerHTML = `&#128161; ${gameDifficulty}`;
+
+    
     
     
     // function popupButtons contains even listeners of buttons inside the popup. We store them in a function in order to be able to loop them and save space.
@@ -235,6 +292,8 @@ function startButton(){
         }
       }
     }
+
+    
 
     document.getElementsByClassName("menuButton")[0].onclick = () => {
       // document.getElementById("sudokuContainer").innerHTML = "";
@@ -297,8 +356,6 @@ function startButton(){
         num2 = undefined;
       }
     }
-
-
 
     document.getElementsByClassName("pauseButton")[0].onclick = () => {
       // document.getElementById("sudokuContainer").style.visibility = "hidden";
@@ -369,31 +426,7 @@ function startButton(){
         num1 = i;
         num2 = j;
 
-        for (var a = 1; a < format + 1; a++) {
-          for (var b = 1; b < format + 1; b++) {
-            currentValue = document.getElementById(`a${getIndex(a, b)}`).innerHTML;
-
-            if(currentValue == document.getElementById(`a${getIndex(num1, num2)}`).innerHTML){
-              document.getElementById(`a${getIndex(a, b)}`).classList.add("sameInput");
-            }else{
-              document.getElementById(`a${getIndex(a, b)}`).classList.remove("sameInput");
-            }
-          }
-        }
-
       });
-    }
-    
-
-    function toggleOnce(){
-      var inputs = document.getElementsByClassName("input");
-        for (let index = 0; index < inputs.length; index++) {
-          const element = inputs[index];
-          element.classList.remove("cellHover", "cellActive", "sameInput");
-        }
-
-      num1 = undefined;
-      num2 = undefined;
     }
 
 
