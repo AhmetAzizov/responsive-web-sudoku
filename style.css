@@ -1,145 +1,134 @@
 html {
-  font-size: 1px;
-  background-color: antiquewhite;
+  font-size: 10px;
+  background-color: rgb(87, 86, 86);
   width: 100%;
   height: 100%;
   overflow: hidden;
   user-select: none;
-  /* filter: blur(2px);
-  pointer-events: none;
-  -webkit-filter: blur(2px); */
 }
 
-/* display: flex; 
-justify-content: center; 
-align-items: center; */
+body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-#pauseScreen{
-  background-color: red;
-  position: absolute;
-  text-align: center;
-  width: 90%;
-  height: 40%;
-  left: 5%;
+.mainContainer{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.pauseScreen{
+  background-color: gray;
+  position: fixed;
+  width: 80%;
+  left: 10%;
   top: 20%;
-  border-radius: 50px;
   visibility: hidden;
   z-index: 1;
   font-weight: bolder;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5vh;
 }
 
-#pauseScreen #pauseScreenText{
-  position: absolute;
-  top: 0%;
-  color: green;
+.pauseScreenButtons{
+  font-size: 7vw;
   width: 100%;
-  font-size: 30px;
 }
 
-#pauseScreen #pauseScreenTimeLeft{
-  position: absolute;
-  width: 100%;
-  top: 10%;
-  font-size: 60px;
+.pauseScreen .pauseScreenText{
+  color: lightgray;
+  text-align: center;
+  background-color: darkgrey;
 }
 
-#pauseScreen #pauseScreenResumeButton{
-  position: absolute;
-  width: 50%;
-  height: 25%;
-  background: blue;
-  left: 25%;
-  bottom: 5%;
-  border-radius: 50px;
-  font-size: 50px;
+.pauseScreen .pauseScreenTimeLeft{
+  text-align: center;
+  background-color: lightgray;
 }
 
-#pauseScreen #pauseScreenResumeButton:hover{
-  background-color: rgb(100, 138, 235);
+.pauseScreen .pauseScreenResumeButton{
+  background: rgb(114, 114, 114);
+  /* border-radius: 10vw; */
+  height: minmax(auto, 20%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.pauseScreen .pauseScreenResumeButton:hover{
+  background-color: rgb(104, 104, 104);
+}
 
 #sudokuContainer {
-  position: absolute;
-  width: 45%;
   display: grid;
-  /* grid-template-columns: repeat(6, auto); */
-  transform: 5ms;
-  top: 2%;
-  left: 2%;
+  margin: 1%;
 }
 
-#startButton {
-  position: relative;
+.startPageWrapper{
+  display: flex;
+  flex-direction: column;
   width: 40%;
-  height: 50px;
-  font-size: 35px;
-  margin: auto;
-  display: block;
+  margin-left: 30%;
+  align-items: center;
+}
+
+.startPageButtons{
+  width: 100%;
+  font-size: 3vh;
+  font-weight: bold;
+  height: 5vh;
+  border-radius: 3vh;
   overflow: hidden;
-}
-
-#selectDifficulty {
-  position: relative;
-  font-size: 30px;
-  color: red;
-  width: 40%;
-  margin: auto;
-  display: block;
-  margin-top: 50px;
-  border-radius: 10px;
   text-align: center;
-  overflow: hidden;
+  margin: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  transition: 700ms;
 }
 
-#selectFormat {
-  position: relative;
-  font-size: 30px;
+.startButton{
+  height: 0;
+}
+
+.selectDifficulty {
   color: red;
-  width: 40%;
-  margin: auto;
-  display: block;
-  margin-top: 50px;
-  border-radius: 10px;
-  text-align: center;
-  overflow: hidden;
+}
+
+.selectFormat {
+  color: red;
 }
 
 .input {
-  /* background-color: white;
-  box-sizing: border-box;
-  width: 100px;
-  height: 100px;
-  font-size: 85px;
-  border: 1px solid black;
-  border-radius: 10px;
-  text-align: center;
-  margin: 0;
-  float: left; */
-
   border: 1px solid gray;
   background-color: white;
-  aspect-ratio: 1 / 1;
   text-align: center;
   font-weight: bold;
   overflow: hidden;
-  font-size: 6vh;
+  font-size: 4vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
 }
 
 .menuContainer{
-  position: absolute;
+  box-sizing: border-box;
   display: grid;
-  width: 40%;
-  height: 88%;
   grid-template-columns: repeat(2, 49%);
   grid-template-rows: 1fr 1fr 1fr 3fr;
   grid-gap: 2%;
-  right: 1%;
   background-color: rgb(172, 171, 171);
   border-radius: 5vw;
   padding: 2vw;
-  bottom: 2%;
-  top: 2%;
+  margin: 1%;
 }
 
 .buttonContainer{
@@ -152,19 +141,18 @@ align-items: center; */
 .menuContainer .button {
   background-color: rgb(203, 202, 202);
   text-align: center;
-  font-size: 9vh;
+  font-size: 6vh;
   border-radius: 3vw;
   font-weight: bold;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.numberButtons{
-  background-color: rgb(203, 202, 202);
-  text-align: center;
-  font-size: 9vh;
-  font-weight: bold;
-  overflow: hidden;
+.menuContainer .numberButtons{
   border: 1px solid rgb(172, 171, 171);
+  border-radius: 0;
 }
 
 .clearButton{
@@ -186,7 +174,6 @@ align-items: center; */
 .pauseButton{
   grid-row: 2 / 3;
   grid-column: 1 / 2;
-  font-weight: lighter !important;
 }
 
 .solveButton{
@@ -211,148 +198,65 @@ align-items: center; */
   background-color: rgb(203, 202, 202);
 }
 
-.menuContainer .tipButton:hover{
+.menuContainer .sideTipButton:hover{
   background-color: yellow;
 }
 
 
+@media(orientation: portrait){
+  .menuContainer .button:hover{
+    background-color: rgb(203, 202, 202);
+  }
 
-@media (orientation: portrait){
+  .mainContainer{
+    flex-direction: column;
+  }
+
   .button:hover{
     background-color: rgb(203, 202, 202);
   }
 
-  .numberButtons:hover{
-    background-color: rgb(203, 202, 202);
+  .menuContainer{
+    height: 1px;
+    flex-grow: 1;
   }
-
-  #startButton{
-    width: 60%;
-  }
-
-  #selectDifficulty{
-    width: 60%;
-  }
-
-  #selectFormat{
-    width: 60%;
-  }
-
-  @media (1/1 > aspect-ratio >= 10/15){
-      .menuContainer{
-          position: absolute;
-          width: 90%;
-          left: 3%;
-          height: 25%;
-          bottom: 1vh;
-          right: auto;
-          top: auto;
-      }
   
-      #sudokuContainer{
-          position: absolute;
-          width: 90%;
-          left: 5%;
-          top: 1%;
-      }
+  @media (aspect-ratio > 6/10){
+    #sudokuContainer .input{
+      aspect-ratio: initial;
+    }
 
-      .menuContainer .button{
-          font-size: 2.5vh;
-      }
-
-      .menuContainer .numberButtons{
-        font-size: 2.5vh;
-      }
-
-      .input{
-        font-size: 6vh;
-      }
-  }
-
-  @media (10/15 > aspect-ratio > 9/16){
-      .menuContainer{
-          position: absolute;
-          width: 90%;
-          left: 3%;
-          height: 30%;
-          bottom: 1vh;
-          right: auto;
-          top: auto;
-      }
-  
-      #sudokuContainer{
-          position: absolute;
-          width: 90%;
-          left: 5%;
-          top: 1%;
-      }
-
-      .menuContainer .button{
-          font-size: 3vh;
-          padding: 1%;
-      }
-
-      .menuContainer .numberButtons{
-        font-size: 3vh;
-        padding: 1%;
-      }
-
-      .input{
-        font-size: 5vh;
-      }
-  }
-
-
-  @media (aspect-ratio <= 9/16){
-      .menuContainer{
-          position: absolute;
-          width: 90%;
-          left: 3%;
-          height: 40%;
-          bottom: 1%;
-          right: auto;
-          top: auto;
-      }
-  
-      #sudokuContainer{
-          width: 98%;
-          top: 1%;
-          left: 1%;
-      }
-
-      .menuContainer .button{
-          font-size: 4vh;
-          padding: 2%;
-      }
-
-      .input{
-        font-size: 4vh;
-      }
-
-      .menuContainer .numberButtons{
-        font-size: 4vh;
-      }
+    #sudokuContainer{
+      height: 60%;
+    }
   }
 }
 
-@media (aspect-ratio >= 2 / 1){
+@media(orientation: landscape){
+  .mainContainer{
+    flex-direction: row;
+  }
+
+  .menuContainer{
+    flex-grow: 1;
+  }
+
   #sudokuContainer{
-      width: 40%;
+    width: 48%;
+    height: max-content;
   }
 
-  /* .button{
-      font-size: 1.4rem;
-  } */
+  @media(aspect-ratio > 2/1){
+    #sudokuContainer .input{
+      aspect-ratio: initial;
+    }
+
+    #sudokuContainer{
+      height: auto;
+    }
+  }
 }
 
-
-
-
-.subCell {
-  position: absolute;
-  height: 33.33%;
-  /* z-index: -1; */
-}
 
 .input1 {
   background-color: rgb(241, 241, 241);

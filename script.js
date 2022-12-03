@@ -9,14 +9,17 @@ var gameDifficulty;
 function createStartPage(){
   const body = document.body;
 
-  var startButtonn = document.createElement("button");
-  startButtonn.id = "startButton";
-  //startButtonn.onclick = startButton();
+  var startPageWrapper = document.createElement("div");
+  startPageWrapper.classList.add("startPageWrapper");
+
+  var startButtonn = document.createElement("div");
+  startButtonn.classList.add("startButton", "startPageButtons");
   startButtonn.onclick = () => {startButton()};
   startButtonn.innerText = "START";
 
   var selectDifficulty = document.createElement("select");
-  selectDifficulty.id = "selectDifficulty";
+  selectDifficulty.classList.add("selectDifficulty", "startPageButtons");
+  selectDifficulty.id = "selectD";
   
   var optionDefault = document.createElement("option");
   optionDefault.selected = true;
@@ -41,7 +44,7 @@ function createStartPage(){
 
 
   var selectFormat = document.createElement("select");
-  selectFormat.id = "selectFormat";
+  selectFormat.classList.add("selectFormat", "startPageButtons");
 
   const optionFormatDefault = document.createElement("option");
   optionFormatDefault.value = "0";
@@ -60,21 +63,55 @@ function createStartPage(){
 
   selectFormat.append(optionFormatDefault, option6x6, option9x9)
   
-  body.append(startButtonn, selectDifficulty, selectFormat);
+  startPageWrapper.append(selectDifficulty, selectFormat, startButtonn);
+
+  body.append(startPageWrapper);
+
+  document.getElementsByClassName("selectDifficulty")[0].addEventListener("change", () => {
+    document.getElementsByClassName("selectDifficulty")[0].style.color = "green";
+    
+      if(document.getElementsByClassName("selectFormat")[0].value != "0"){
+      document.getElementsByClassName("startButton")[0].style.height = "5vh";
+      }
+    });
+    
+    document.getElementsByClassName("selectFormat")[0].addEventListener("change", () => {
+      document.getElementsByClassName("selectFormat")[0].style.color = "green";
+    
+      if(document.getElementsByClassName("selectDifficulty")[0].value != "0"){
+      document.getElementsByClassName("startButton")[0].style.height = "5vh";
+      }
+    });
 }
 
 function deleteStartPage(){
-  document.getElementById("startButton").remove();
-  document.getElementById("selectFormat").remove();
-  document.getElementById("selectDifficulty").remove();
+  document.getElementsByClassName("startPageWrapper")[0].remove();
 }
 
 function deleteMainPage(){
-  document.getElementById("sudokuContainer").remove();
-  document.getElementsByClassName("menuContainer")[0].remove();
+  document.getElementsByClassName("mainContainer")[0].remove();
+}
+
+function createPauseScreen(){
+  var pauseScreen = document.createElement("div");
+  pauseScreen.classList.add("pauseScreen");
+
+  var pauseScreenText = document.createElement("div");
+  pauseScreenText.classList.add("pauseScreenText", "pauseScreenButtons");
+  pauseScreenText.innerText = "PAUSED";
+
+  var pauseScreenTimeLeft = document.createElement("div");
+  pauseScreenTimeLeft.classList.add("pauseScreenTimeLeft", "pauseScreenButtons");
+  pauseScreenTimeLeft.innerText = "00:00";
+
+  var pauseScreenResumeButton = document.createElement("div");
+  pauseScreenResumeButton.classList.add("pauseScreenResumeButton", "pauseScreenButtons");
 }
 
 function createMainPage(format){
+  var mainContainer = document.createElement("div");
+  mainContainer.classList.add("mainContainer");
+
   var menuContainer = document.createElement("div");
   menuContainer.classList.add("menuContainer");
 
@@ -83,8 +120,9 @@ function createMainPage(format){
 
 	for (var a = 1; a < format + 1; a++) {
       var button1 = document.createElement("div");
+
 			button1.id = `button${a}`;
-			button1.classList.add("numberButtons");
+			button1.classList.add("numberButtons", "button");
 			button1.innerHTML = `${a}`;
 			
 			buttonContainer.append(button1);
@@ -108,7 +146,7 @@ function createMainPage(format){
 	
 	var pauseButton = document.createElement("div");
 	pauseButton.classList.add("button", "pauseButton");
-	pauseButton.innerHTML = "&#9208;";
+	pauseButton.innerHTML = "l l";
 	
 	var timer = document.createElement("div");
 	timer.classList.add("button", "timer");
@@ -131,11 +169,34 @@ function createMainPage(format){
         sudokuContainer.append(inputs);
       }
     }
+
+
+    var pauseScreen = document.createElement("div");
+    pauseScreen.classList.add("pauseScreen");
+  
+    var pauseScreenText = document.createElement("div");
+    pauseScreenText.classList.add("pauseScreenText", "pauseScreenButtons");
+    pauseScreenText.innerText = "PAUSED";
+  
+    var pauseScreenTimeLeft = document.createElement("div");
+    pauseScreenTimeLeft.classList.add("pauseScreenTimeLeft", "pauseScreenButtons");
+    pauseScreenTimeLeft.innerText = "00:00";
+  
+    var pauseScreenResumeButton = document.createElement("div");
+    pauseScreenResumeButton.classList.add("pauseScreenResumeButton", "pauseScreenButtons");
+    pauseScreenResumeButton.innerHTML = "&#9654;";
+
+    pauseScreen.append(pauseScreenText, pauseScreenTimeLeft, pauseScreenResumeButton);
 	
-	document.body.append(menuContainer, sudokuContainer);
+    mainContainer.append(sudokuContainer, menuContainer, pauseScreen);
+    document.body.append(mainContainer);
 }
 
 createStartPage();
+
+
+
+
 
 // this is the function that is invoked when the user presses start button 
 function startButton(){
@@ -145,19 +206,19 @@ function startButton(){
   busy = true;
   try {
     // error message is shown if the user decides to press the start button without selecting difficulty, format or neither of them. Error message will be shown accordingly 
-    if (document.getElementById("selectDifficulty").value == "0" && document.getElementById("selectFormat").value == "0") {
+    if (document.getElementsByClassName("selectDifficulty")[0].value == "0" && document.getElementsByClassName("selectFormat")[0].value == "0") {
       alert("both difficulty and Format aren't selected");
       return;
     }
-    else if (document.getElementById("selectDifficulty").value == "0") {
+    else if (document.getElementsByClassName("selectDifficulty")[0].value == "0") {
       alert("difficulty isn't selected");
       return;
-    }else if (document.getElementById("selectFormat").value == "0") {
+    }else if (document.getElementsByClassName("selectFormat")[0].value == "0") {
       alert("Format isn't selected");
       return;
     }
 
-    currentFormat = document.getElementById("selectFormat").value; // this variable contains the value of dropdown "selectFormat", either 2,3 or 3,3.
+    currentFormat = document.getElementsByClassName("selectFormat")[0].value; // this variable contains the value of dropdown "selectFormat", either 2,3 or 3,3.
 
     // these 2 variables store the information about the number of rows and columns will there be by looking at the value of currentFormat variable.
     boxRow = parseInt(currentFormat[0]); 
@@ -169,7 +230,7 @@ function startButton(){
     }
 
     var format = boxRow * boxCol; // this variable stores the information whether the game will be 6x6 or 9x9 by simply multiplying the two sides.
-    var gameDifficulty = Math.floor(boxRow * 6 / document.getElementById("selectDifficulty").value);
+    var gameDifficulty = Math.floor(boxRow * 6 / document.getElementsByClassName("selectDifficulty")[0].value);
 
     // this array contains numbers from 1 to 6 or 9 depending on the format user has chosen.
     var __random = [];
@@ -181,6 +242,8 @@ function startButton(){
 
     document.getElementById("sudokuContainer").style.gridTemplateColumns = `repeat(${format}, 1fr)`;
     document.getElementsByClassName("sideTipButton")[0].innerHTML = `&#128161; ${gameDifficulty}`;
+
+    
     
     
     // function popupButtons contains even listeners of buttons inside the popup. We store them in a function in order to be able to loop them and save space.
@@ -231,8 +294,10 @@ function startButton(){
       }
     }
 
+    
+
     document.getElementsByClassName("menuButton")[0].onclick = () => {
-      document.getElementById("sudokuContainer").innerHTML = "";
+      // document.getElementById("sudokuContainer").innerHTML = "";
       //document.getElementById("mainBody").innerHTML = mainbody; 
 
       createStartPage();
@@ -293,23 +358,21 @@ function startButton(){
       }
     }
 
-
-
     document.getElementsByClassName("pauseButton")[0].onclick = () => {
       // document.getElementById("sudokuContainer").style.visibility = "hidden";
-      document.getElementById("pauseScreen").style.visibility = "visible";
+      document.getElementsByClassName("pauseScreen")[0].style.visibility = "visible";
 
       document.getElementById("sudokuContainer").style.pointerEvents = "none";
       document.getElementsByClassName("menuContainer")[0].style.pointerEvents = "none";
 
-      document.getElementById("pauseScreenTimeLeft").innerHTML = minutesDisplay + ":" + secondsDisplay;
+      document.getElementsByClassName("pauseScreenTimeLeft")[0].innerHTML = minutesDisplay + ":" + secondsDisplay;
 
       isPaused = true;
     }
 
-    document.getElementById("pauseScreenResumeButton").onclick = () => {
+    document.getElementsByClassName("pauseScreenResumeButton")[0].onclick = () => {
       // document.getElementById("sudokuContainer").style.visibility = "visible";
-      document.getElementById("pauseScreen").style.visibility = "hidden";
+      document.getElementsByClassName("pauseScreen")[0].style.visibility = "hidden";
 
       document.getElementById("sudokuContainer").style.pointerEvents = "all";
       document.getElementsByClassName("menuContainer")[0].style.pointerEvents = "all";
@@ -320,6 +383,7 @@ function startButton(){
     
 
     document.getElementsByClassName("clearButton")[0].onclick = () => {
+
       document.getElementById(`a${getIndex(num1, num2)}`).innerHTML = null;
       delete sudokuMatrix[getIndex(num1, num2)];
 
@@ -347,6 +411,7 @@ function startButton(){
     var $ = document.getElementById.bind(document);
 
     var num1, num2;
+    var once = true;
 
     function onchangeHandler(i, j) {
       $(`a${getIndex(i, j)}`).addEventListener("click", (e) => {
@@ -354,24 +419,17 @@ function startButton(){
 
         checkSameBox(i, j);
 
+        if(num1 == i && num2 == j && num1 != undefined && num2 != undefined){
+          if(once == true) {toggleOnce(); once = false;}
+          else {once = true;}
+        }
+
         num1 = i;
         num2 = j;
 
-        for (var a = 1; a < format + 1; a++) {
-          for (var b = 1; b < format + 1; b++) {
-            currentValue = document.getElementById(`a${getIndex(a, b)}`).innerHTML;
-
-            if(currentValue == document.getElementById(`a${getIndex(num1, num2)}`).innerHTML){
-              document.getElementById(`a${getIndex(a, b)}`).classList.add("sameInput");
-            }else{
-              document.getElementById(`a${getIndex(a, b)}`).classList.remove("sameInput");
-            }
-          }
-        }
-
       });
     }
--
+
 
     function toggleRight(){
       num2++;
@@ -542,7 +600,7 @@ function startButton(){
 
     function createDifficulty() {
 
-      var difficulty = document.getElementById("selectDifficulty").value;
+      var difficulty = document.getElementsByClassName("selectDifficulty")[0].value;
 
       if (boxRow == 3) difficulty = difficulty * 1.5;
 
