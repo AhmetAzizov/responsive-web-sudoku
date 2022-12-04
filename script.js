@@ -71,7 +71,7 @@ function createStartPage(){
     document.getElementsByClassName("selectDifficulty")[0].style.color = "green";
     
       if(document.getElementsByClassName("selectFormat")[0].value != "0"){
-      document.getElementsByClassName("startButton")[0].style.height = "5vh";
+      document.getElementsByClassName("startButton")[0].style.height = "12vh";
       }
     });
     
@@ -79,7 +79,7 @@ function createStartPage(){
       document.getElementsByClassName("selectFormat")[0].style.color = "green";
     
       if(document.getElementsByClassName("selectDifficulty")[0].value != "0"){
-      document.getElementsByClassName("startButton")[0].style.height = "5vh";
+      document.getElementsByClassName("startButton")[0].style.height = "12vh";
       }
     });
 }
@@ -360,7 +360,7 @@ function startButton(){
 
     document.getElementsByClassName("pauseButton")[0].onclick = () => {
       // document.getElementById("sudokuContainer").style.visibility = "hidden";
-      document.getElementsByClassName("pauseScreen")[0].style.visibility = "visible";
+      document.getElementsByClassName("pauseScreen")[0].style.height = "80%";
 
       document.getElementById("sudokuContainer").style.pointerEvents = "none";
       document.getElementsByClassName("menuContainer")[0].style.pointerEvents = "none";
@@ -372,7 +372,7 @@ function startButton(){
 
     document.getElementsByClassName("pauseScreenResumeButton")[0].onclick = () => {
       // document.getElementById("sudokuContainer").style.visibility = "visible";
-      document.getElementsByClassName("pauseScreen")[0].style.visibility = "hidden";
+      document.getElementsByClassName("pauseScreen")[0].style.height = "0";
 
       document.getElementById("sudokuContainer").style.pointerEvents = "all";
       document.getElementsByClassName("menuContainer")[0].style.pointerEvents = "all";

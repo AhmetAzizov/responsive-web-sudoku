@@ -22,43 +22,45 @@ body{
 }
 
 .pauseScreen{
-  background-color: gray;
+  background-color: transparent;
   position: fixed;
   width: 80%;
+  height: 0;
+  overflow: hidden;
   left: 10%;
   top: 20%;
-  visibility: hidden;
   z-index: 1;
   font-weight: bolder;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 5vh;
+  transition: 1000ms;
 }
 
 .pauseScreenButtons{
-  font-size: 7vw;
+  font-size:8vh;
   width: 100%;
+  /* height: 33.33%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pauseScreen .pauseScreenText{
   color: lightgray;
-  text-align: center;
   background-color: darkgrey;
+  border-top-left-radius: 5vh;
+  border-top-right-radius: 5vh;
 }
 
 .pauseScreen .pauseScreenTimeLeft{
-  text-align: center;
   background-color: lightgray;
 }
 
 .pauseScreen .pauseScreenResumeButton{
   background: rgb(114, 114, 114);
-  /* border-radius: 10vw; */
-  height: minmax(auto, 20%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-bottom-left-radius: 5vh;
+  border-bottom-right-radius: 5vh;
 }
 
 .pauseScreen .pauseScreenResumeButton:hover{
@@ -73,16 +75,15 @@ body{
 .startPageWrapper{
   display: flex;
   flex-direction: column;
-  width: 40%;
-  margin-left: 30%;
+  width: 80%;
+  margin-left: 10%;
   align-items: center;
 }
 
 .startPageButtons{
-  width: 100%;
-  font-size: 3vh;
+  font-size: 7vh;
   font-weight: bold;
-  height: 5vh;
+  height: 12vh;
   border-radius: 3vh;
   overflow: hidden;
   text-align: center;
@@ -95,15 +96,19 @@ body{
 }
 
 .startButton{
+  background-color: green;
   height: 0;
+  width: 80%
 }
 
 .selectDifficulty {
   color: red;
+  width: 100%
 }
 
 .selectFormat {
   color: red;
+  width: 90%
 }
 
 .input {
@@ -267,10 +272,14 @@ body{
   border-style: dashed;
   border-color: rgb(7, 62, 243)  */
   background-color: #c3c3c3;
+  transition: 1000ms;
+
 }
 
 #sudokuContainer .cellActive {
-  background-color: #ededed;
+  background-color: rgb(95, 95, 95);
+  color: white;
+  transition: 500ms;
 }
 
 .tipInput{
