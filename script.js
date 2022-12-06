@@ -463,8 +463,7 @@ function startButton(){
       var inputs = document.getElementsByClassName("input");
       for (let index = 0; index < inputs.length; index++) {
         const element = inputs[index];
-        element.classList.remove("cellHover");
-        element.classList.remove("cellActive");
+        element.classList.remove("cellHover", "cellActive", "sameInput");
       }
 
       for (var i = 1; i < format + 1; i++) {
