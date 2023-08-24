@@ -272,14 +272,14 @@ body{
   border-style: dashed;
   border-color: rgb(7, 62, 243)  */
   background-color: #c3c3c3;
-  transition: 1000ms;
+  /* transition: 1000ms; */
 
 }
 
 #sudokuContainer .cellActive {
   background-color: rgb(95, 95, 95);
   color: white;
-  transition: 500ms;
+  /* transition: 500ms; */
 }
 
 .tipInput{

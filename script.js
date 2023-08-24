@@ -647,8 +647,6 @@ function startButton(){
       document.getElementById(`a${key}`).classList.add("cellInitial");
     }
 
-    // document.getElementById("mainBody").innerHTML = "";
-
     // ---------------------------------------------------------------------
 
     var seconds = 0;
@@ -682,8 +680,8 @@ function startButton(){
       }
       
       document.getElementsByClassName("timer")[0].innerHTML = minutesDisplay + ":" + secondsDisplay;
-    }
-    }
+    }  
+  }
 
     deleteStartPage();
   } finally {
